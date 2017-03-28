@@ -2,52 +2,54 @@ import Foundation
 
 public class Ship
 {
-  //Add coords later
+  //Size of the ship
   var size : Int
+  //Attribute to check if ship is destoryed
   var isDestoryed : Bool = false
+  //String that represents the ship
   var symbol : String
+  //Name of the ship
+  var name : String
+  //The amount of hits the ship has taken
   var hitCount : Int = 0
-  var positioin :
+  //Determine if ship is horizontal(0) or vertical(1)
+  //srand( UInt32( time( nil ) ) )
+  var axis : Int = random()%2
+  //Where the ship is located on the board
+  var position : Int
 
-  public init(size : Int, symbol : String)
+  public init(size : Int, symbol : String, name : String)
   {
       self.size = size
       self.symbol = symbol
+      self.name = name
   }
 
-  public hit()
+  public func generateShip()
   {
-    hitCount += 1
+    var shipID = random()%3
+    switch (shipID)
+    {
+    case
+    }
   }
 
-}
-
-public class Submarine : Ship
-{
-  var size : Int = 3
-  var symbol : String = "Ө"
-  public override init(size : Int, symbol : String)
+  public func hit()
   {
-    super.init(size : size, symbol : symbol)
+    if isDestoryed == false
+    {
+      hitCount += 1
+      print("The \(name) has been hit!")
+    }
   }
-}
 
-public class ACarrier : Ship
-{
-  var size : Int = 4
-  var symbol : String = "Ш"
-  public override init(size : Int, symbol : String)
+  public func dead()
   {
-    super.init(size : size, symbol : symbol)
+    if hitCount == size
+    {
+      isDestoryed = true
+      print("The \(name) has been destoryed!")
+    }
   }
-}
 
-public class TugBoat : Ship
-{
-  var size : Int = 2
-  var symbol : String = "Ӝ"
-  public override init(size : Int, symbol : String)
-  {
-    super.init(size : size, symbol : symbol)
-  }
 }

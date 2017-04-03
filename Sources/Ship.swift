@@ -14,7 +14,8 @@ public class Ship
   var hitCount : Int = 0
   //Determine if ship is horizontal(0) or vertical(1)
   //srand( UInt32( time( nil ) ) )
-  var axis : Int = random()%2
+  //var axis : Int = random()%2
+  var direction : Int
   //Where the ship is located on the board
   var position : Int
 
@@ -23,15 +24,26 @@ public class Ship
       self.size = size
       self.symbol = symbol
       self.name = name
+      self.direction = genDirection()
   }
 
-  public func generateShip()
+  public func genShip()
   {
     var shipID = random()%3
     switch (shipID)
     {
-    case
+      case 0 :
+      case 1 :
+      case 2 :
+      default :
     }
+    //Return Ship
+  }
+
+  public func genDirection()
+  {
+    //North(0), East(1), South(2), West(3)
+    direction = random()%4
   }
 
   public func hit()

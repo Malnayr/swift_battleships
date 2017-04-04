@@ -21,6 +21,8 @@ public class Game
     var ship : Ship?
     switch (shipID)
     {
+      //generate ship coordinates before you create the Ship
+      //Then pass in the coordinates
       case 0 : ship = TugBoat(coordinates : [[0,0],[0,1]])
       case 1 : ship = Submarine(coordinates : [[0,2],[0,3],[0,4]])
       case 2 : ship = ACCarrier(coordinates : [[0,5],[0,6],[0,7]])

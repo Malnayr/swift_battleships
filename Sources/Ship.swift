@@ -45,22 +45,28 @@ public class Ship
     return direction = random()%4
   }
 
-  public func hit()
+  public func checkHit(userCoord : [Int])
   {
-    if isDestoryed == false
+    if (!isDestoryed)
     {
-      hitCount += 1
-      print("The \(name) has been hit!")
+      for coord in self.coordinates
+      {
+        if(coord == userCoord)
+        {
+          hitCount += 1
+          print("The \(name) has been hit!")
+          //remove the index that has been hit from the ship coordinate array
+          var index = self.coordinates.indexOf(coord)
+          self.coordinates.remove(at: index)
+        }
+        if(self.coordinates.count == 0)
+        {
+          isDestoryed = true
+          print("The \(name) has been destoryed!")
+        }
+      }
     }
   }
 
-  public func dead()
-  {
-    if hitCount == size
-    {
-      isDestoryed = true
-      print("The \(name) has been destoryed!")
-    }
-  }
 
 }

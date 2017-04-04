@@ -1,10 +1,7 @@
 public class TugBoat : Ship
 {
-  var size : Int = 2
-  var symbol : String = "Ӝ"
-  var name : String = "Tug Boat"
-  public override init(size : Int, symbol : String, name : String)
+  public init(coordinates : [[Int]])
   {
-    super.init(size : size, symbol : symbol, name : name)
+    super.init(size : 2, symbol : "Ӝ", name : "Tug Boat", coordinates : coordinates)
   }
 }

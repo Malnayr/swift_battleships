@@ -1,10 +1,7 @@
-public class ACarrier : Ship
+public class ACCarrier : Ship
 {
-  var size : Int = 4
-  var symbol : String = "Ш"
-  var name : String = "Air Craft Carrier"
-  public override init(size : Int, symbol : String, name : String)
+  public init(coordinates : [[Int]])
   {
-    super.init(size : size, symbol : symbol, name : name)
+    super.init(size : 4, symbol : "Ш", name : "Air Craft Carrier", coordinates : coordinates)
   }
 }

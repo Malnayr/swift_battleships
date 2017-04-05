@@ -8,18 +8,20 @@ public class Board
   public init()
   {
     //Create a 10 x 10 two dimensional array
-    self.board = [[Ship?]]
+    self.board = [[Ship?]](repeating:[Ship?](repeating:nil, count:10), count:10)
   }
 
-  subscript (row : Int, column : Int) -> String
+  public func displayBoard()
   {
-    get
+    //for each row in board
+      //for each column in row
+        //
+    for row in board
     {
-      return board[row][column]
-    }
-    set
-    {
-      board[row][column] = newValue
+      for column in row
+      {
+        print("*")
+      }
     }
   }
 

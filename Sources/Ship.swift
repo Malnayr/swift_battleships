@@ -19,9 +19,6 @@ public class Ship
   //Name of the ship
   var name : String
 
-  //The amount of hits the ship has taken
-  var hitCount : Int = 0
-
   //Determine if ship is facing North, East, South, or West
   var direction : Int
 
@@ -53,11 +50,10 @@ public class Ship
       {
         if(coord == userCoord)
         {
-          hitCount += 1
+          size -= 1
           print("The \(name) has been hit!")
           //remove the index that has been hit from the ship coordinate array
-          var index = self.coordinates.indexOf(coord)
-          self.coordinates.remove(at: index)
+          self.coordinates = self.coordinates.filter(){ $0 != coord }
         }
         if(self.coordinates.count == 0)
         {

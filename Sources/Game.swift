@@ -15,6 +15,11 @@ public class Game
     print("Welcome to Battleships! Made by the Lam fam.")
     repeat {
         board.displayBoard()
+        print(board.ships[0])
+        print(board.ships[1])
+        print(board.ships[2])
+        print(board.ships[3])
+        print(board.ships[4])
         //While all ship are not destoryed
           //Ask for coords
 
@@ -24,24 +29,6 @@ public class Game
         play = playAgain()
     } while (play)
 
-  }
-
-  //Use this to generate ships randomly
-  public func genShip() -> Ship
-  {
-    srand( UInt32( time( nil ) ) )
-    let shipID = random()%3
-    var ship : Ship?
-    switch (shipID)
-    {
-      //generate ship coordinates before you create the Ship
-      //Then pass in the coordinates
-      case 0 : ship = TugBoat(coordinates : [[0,0],[0,1]])
-      case 1 : ship = Submarine(coordinates : [[0,2],[0,3],[0,4]])
-      case 2 : ship = ACCarrier(coordinates : [[0,5],[0,6],[0,7]])
-      default : print()
-    }
-    return ship!
   }
 
   public func playAgain() -> Bool

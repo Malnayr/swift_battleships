@@ -15,14 +15,21 @@ public class Board
   {
     //for each row in board
       //for each column in row
-        //
+    var vIndex : Int = 0
+    var boardString : String = "  \(hCoords.joined(separator:" "))\n"
+
+
     for row in board
     {
+      boardString += vCoords[vIndex]
       for column in row
       {
-        print("*")
+        boardString += " *"
       }
+      boardString += "\n"
+      vIndex += 1
     }
+    print(boardString)
   }
 
 }

@@ -10,6 +10,19 @@ public class Game
 {
   public func start()
   {
+    var board = Board()
+    var play : Bool = true
+    print("Welcome to Battleships! Made by the Lam fam.")
+    repeat {
+        board.displayBoard()
+        //While all ship are not destoryed
+          //Ask for coords
+
+
+
+        //Ask if user wants to play again
+        play = playAgain()
+    } while (play)
 
   }
 
@@ -29,5 +42,24 @@ public class Game
       default : print()
     }
     return ship!
+  }
+
+  public func playAgain() -> Bool
+  {
+    var bReturn = false
+    var answer : String = ""
+
+    repeat {
+      print("Would you like to play again? (Y/N)")
+      answer = readLine()!
+      answer = String(answer[answer.startIndex]).lowercased()
+      switch (answer) {
+        case "y": bReturn = true
+        case "n": bReturn = false
+        default: answer = ""
+      }
+    } while (answer == "")
+
+    return bReturn
   }
 }

@@ -129,7 +129,7 @@ public class Board
           //     board[userCoord[0]][userCoord[1]] = ship.symbol
           //   }
           // }
-          isHit = ship.checkHit(userCoord : userCoord) == true ? isHit : true
+          isHit = ship.checkHit(userCoord)
           print(isHit)
           if(isHit)
           {

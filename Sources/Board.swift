@@ -5,6 +5,7 @@ public class Board
   var ships = [Ship]()
   //Empty 2D array
   var board = [[String]]()
+  var takenCoords = [[Int]]()
   var vCoords = ["A","B","C","D","E","F","G","H","I","J"]
   var hCoords = ["1","2","3","4","5","6","7","8","9","10"]
 
@@ -13,6 +14,7 @@ public class Board
     //Create a 10 x 10 two dimensional array
     self.board = [[String]](repeating:[String](repeating:"*", count:10), count:10)
     placeShipsOnBoard()
+    print("Taken Coords: \(takenCoords)")
   }
 
   public func displayBoard()
@@ -38,11 +40,26 @@ public class Board
   public func placeShipsOnBoard()
   {
     srand( UInt32( time( nil ) ) )
-    for index in 0...4
+
+    for index in ships.count..<5
     {
       let shipID = random()%3
       ships.append(genShip(shipID : shipID))
+      print(ships[index].name)
       print(ships[index].direction)
+      for coord in ships[index].coordinates
+      {
+        if !takenCoords.contains{ $0 == coord }
+        {
+          takenCoords.append(coord)
+        }
+        else
+        {
+          //remove ship from ships
+          //generate new ship
+        }
+
+      }
       //initialize ships onto the board
       var shipCoord = ships[index].coordinates[0]
       //give the ships a masking symbol until player calls position

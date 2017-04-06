@@ -74,14 +74,14 @@ public class Ship
       }
       else
       {
-        // for index in 1..<self.size
-        // {
-        //   var coord : [Int] = []
-        //   coord[0] = initialCoord[0] + index
-        //   coord[1] = initialCoord[1]
-        //   coordinates.append(coord)
-        //   print(coordinates)
-        // }
+        for index in 1..<self.size
+        {
+          var coord = [Int]()
+          coord.append(initialCoord[0] + index)
+          coord.append(initialCoord[1])
+          coordinates.append(coord)
+          print(coordinates)
+        }
       }
     case 1:
       if(initialCoord[1] + self.size > 9)
@@ -91,27 +91,48 @@ public class Ship
       }
       else
       {
-
+        for index in 1..<self.size
+        {
+          var coord = [Int]()
+          coord.append(initialCoord[0])
+          coord.append(initialCoord[1] + index)
+          coordinates.append(coord)
+          print(coordinates)
+        }
       }
     case 2:
-      if(initialCoord[0] - self.size > 9)
+      if(initialCoord[0] - self.size < 0)
       {
         self.genDirection()
         self.placeShip()
       }
       else
       {
-
+        for index in 1..<self.size
+        {
+          var coord = [Int]()
+          coord.append(initialCoord[0] - index)
+          coord.append(initialCoord[1])
+          coordinates.append(coord)
+          print(coordinates)
+        }
       }
     case 3:
-      if(initialCoord[1] - self.size > 9)
+      if(initialCoord[1] - self.size < 0)
       {
         self.genDirection()
         self.placeShip()
       }
       else
       {
-
+        for index in 1..<self.size
+        {
+          var coord = [Int]()
+          coord.append(initialCoord[0])
+          coord.append(initialCoord[1] - index)
+          coordinates.append(coord)
+          print(coordinates)
+        }
       }
     default:
       print("Dead.")

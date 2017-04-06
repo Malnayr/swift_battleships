@@ -5,6 +5,7 @@ public class Board
   var ships = [Ship]()
   //Empty 2D array
   var board = [[String]]()
+  //takenCoords used for debugging to see if appropriate positions are taken
   var takenCoords = [[Int]]()
   var vCoords = ["A","B","C","D","E","F","G","H","I","J"]
   var hCoords = ["1","2","3","4","5","6","7","8","9","10"]
@@ -67,33 +68,26 @@ public class Board
 
       for coord in currentShip.coordinates
       {
-      if (!takenCoords.contains{ $0 == coord })
-        {
-          takenCoords.append(coord)
-        }
-        else
-        {
-          collisionDetected = true
-        }
+        collisionDetected = !takenCoords.contains{$0 == coord} ? collisionDetected : true
       }
 
       if (collisionDetected)
       {
         //remove ship from ships
-        for coord in currentShip.coordinates
-        {
-          takenCoords = takenCoords.filter(){ $0 != coord }
-        }
         ships.remove(at: index)
       }
       else
       {
         //initialize ships onto the board
         //give the ships a masking symbol until player calls position
-        for shipCoord in ships[index].coordinates
+        for coord in currentShip.coordinates
         {
-          board[shipCoord[0]][shipCoord[1]] = ships[index].symbol
+            takenCoords.append(coord)
         }
+        // for shipCoord in ships[index].coordinates
+        // {
+        //   board[shipCoord[0]][shipCoord[1]] = ships[index]
+        // }
 
       }
     }
@@ -103,6 +97,7 @@ public class Board
   {
     let vInitialCoord = random()%10
     let hInitialCoord = random()%10
+
     var ship : Ship?
     switch (shipID)
     {
@@ -114,5 +109,36 @@ public class Board
       default : print("Broke in Board.swift:genShip method.")
     }
     return ship!
+  }
+
+  public func checkCoords(userCoord : [Int])
+  {
+      var isHit : Bool = false
+      if (board[userCoord[0]][userCoord[1]] == " ")
+      {
+        print("You already chose this spot, no ship here.")
+      }
+      else
+      {
+        for ship in ships
+        {
+          // for coord in ship.coordinates
+          // {
+          //   if (coord == userCoord)
+          //   {
+          //     board[userCoord[0]][userCoord[1]] = ship.symbol
+          //   }
+          // }
+          isHit = ship.checkHit(userCoord : userCoord) == true ? isHit : true
+          print(isHit)
+          if(isHit)
+          {
+            print(ship.symbol)
+            board[userCoord[0]][userCoord[1]] = ship.symbol
+          }
+
+        }
+      }
+
   }
 }

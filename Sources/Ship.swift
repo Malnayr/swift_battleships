@@ -38,14 +38,16 @@ public class Ship
     return direction = random()%4
   }
 
-  public func checkHit(userCoord : [Int])
+  public func checkHit(userCoord : [Int]) -> Bool
   {
+    var isHit : Bool = false
     if (!isDestoryed)
     {
       for coord in self.coordinates
       {
         if(coord == userCoord)
         {
+          isHit = true
           size -= 1
           print("The \(name) has been hit!")
           //remove the index that has been hit from the ship coordinate array
@@ -58,6 +60,7 @@ public class Ship
         }
       }
     }
+    return isHit
   }
 
   public func placeShip()

@@ -32,7 +32,7 @@ public class Game
           print("row: \(row), col: \(col)")
           //pass coords to board
             //board will check if it hit a ship
-
+          board.checkCoords(userCoord: [row,col])
 
           //display board
           board.displayBoard()

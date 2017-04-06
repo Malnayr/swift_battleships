@@ -60,6 +60,10 @@ public class Ship
         }
       }
     }
+    if(!isHit)
+    {
+      print("You missed!")
+    }
     return isHit
   }
 

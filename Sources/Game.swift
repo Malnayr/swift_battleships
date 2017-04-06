@@ -1,15 +1,11 @@
 import Foundation
 
-//Ascii conversion extension courtesy of:
-//http://stackoverflow.com/questions/29835242/whats-the-simplest-way-to-convert-from-a-single-character-string-to-an-ascii-va
-extension String {
-    var asciiArray: [UInt32] {
-        return unicodeScalars.filter{$0.isASCII}.map{$0.value}
-    }
-}
-
+//Extension for variables that are type Character
+//Give it a extension, so it can convert its ascii value to a number
 extension Character {
     var asciiValue: UInt32? {
+        //look into unicodeScalars and filter out the ascii that matches the
+        //Character that is calling this extension and grab its value
         return String(self).unicodeScalars.filter{$0.isASCII}.first?.value
     }
 }
@@ -32,8 +28,8 @@ public class Game
           var col : Int
           row = getRow()
           col = getCol()
-          print("row: \(row)")
-          print("col: \(col)")
+          print("You've decided to fire at: ")
+          print("row: \(row), col: \(col)")
           //pass coords to board
             //board will check if it hit a ship
 

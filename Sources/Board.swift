@@ -17,7 +17,14 @@ public class Board
     for ship in ships
     {
       print("Name: \(ship.name)")
-      print("Direction: \(ship.direction)")
+      switch(ship.direction)
+      {
+      case 0: print("Direction: North")
+      case 1: print("Direction: East")
+      case 2: print("Direction: South")
+      case 3: print("Direction: West")
+      default: print("")
+      }
       print("Coordinates: \(ship.coordinates)")
     }
     print("Taken Coords: \(takenCoords)")
@@ -27,15 +34,17 @@ public class Board
   {
     //for each row in board
       //for each column in row
+
     var vIndex : Int = 0
-    var boardString : String = "  \(hCoords.joined(separator:" "))\n"
+    var boardString : String = "  \(hCoords.joined(separator:"  "))\n"
 
     for row in board
     {
       boardString += vCoords[vIndex]
       for column in row
       {
-        boardString += " \(column)"
+        //<space>symbol<space>
+        boardString += " \(column) "
       }
       boardString += "\n"
       vIndex += 1
@@ -47,16 +56,18 @@ public class Board
   {
     srand( UInt32( time( nil ) ) )
     var index = 0
-    while(ships.count <= 5)
+    var collisionDetected : Bool
+    while(ships.count != 5)
     {
-      var collisionDetected = false
+      collisionDetected = false
       let shipID = random()%3
       ships.append(genShip(shipID : shipID))
+      index = ships.count - 1
       let currentShip = ships[index]
 
       for coord in currentShip.coordinates
       {
-        if !takenCoords.contains{ $0 == coord }
+      if (!takenCoords.contains{ $0 == coord })
         {
           takenCoords.append(coord)
         }
@@ -69,8 +80,11 @@ public class Board
       if (collisionDetected)
       {
         //remove ship from ships
+        for coord in currentShip.coordinates
+        {
+          takenCoords = takenCoords.filter(){ $0 != coord }
+        }
         ships.remove(at: index)
-        index -= 1
       }
       else
       {
@@ -80,8 +94,8 @@ public class Board
         {
           board[shipCoord[0]][shipCoord[1]] = ships[index].symbol
         }
+
       }
-      index += 1
     }
   }
   //Use this to generate ships randomly

@@ -1,10 +1,5 @@
 import Foundation
 
-struct Coordinate {
-    var latitude : Int
-    var longitude : Int
-}
-
 public class Ship
 {
   //Size of the ship
@@ -33,6 +28,7 @@ public class Ship
       self.name = name
       self.direction = random()%4
       self.coordinates = coordinates
+      self.placeShip()
   }
 
   public func genDirection()
@@ -61,6 +57,64 @@ public class Ship
           print("The \(name) has been destoryed!")
         }
       }
+    }
+  }
+
+  public func placeShip()
+  {
+    var initialCoord = coordinates[0]
+    //North(0), East(1), South(2), West(3)
+    switch(self.direction)
+    {
+    case 0:
+      if(initialCoord[0] + self.size > 9)
+      {
+        self.genDirection()
+        self.placeShip()
+      }
+      else
+      {
+        // for index in 1..<self.size
+        // {
+        //   var coord : [Int] = []
+        //   coord[0] = initialCoord[0] + index
+        //   coord[1] = initialCoord[1]
+        //   coordinates.append(coord)
+        //   print(coordinates)
+        // }
+      }
+    case 1:
+      if(initialCoord[1] + self.size > 9)
+      {
+        self.genDirection()
+        self.placeShip()
+      }
+      else
+      {
+
+      }
+    case 2:
+      if(initialCoord[0] - self.size > 9)
+      {
+        self.genDirection()
+        self.placeShip()
+      }
+      else
+      {
+
+      }
+    case 3:
+      if(initialCoord[1] - self.size > 9)
+      {
+        self.genDirection()
+        self.placeShip()
+      }
+      else
+      {
+
+      }
+    default:
+      print("Dead.")
     }
   }
 

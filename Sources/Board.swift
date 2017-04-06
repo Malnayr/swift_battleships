@@ -14,6 +14,12 @@ public class Board
     //Create a 10 x 10 two dimensional array
     self.board = [[String]](repeating:[String](repeating:"*", count:10), count:10)
     placeShipsOnBoard()
+    for ship in ships
+    {
+      print("Name: \(ship.name)")
+      print("Direction: \(ship.direction)")
+      print("Coordinates: \(ship.coordinates)")
+    }
     print("Taken Coords: \(takenCoords)")
   }
 
@@ -40,14 +46,15 @@ public class Board
   public func placeShipsOnBoard()
   {
     srand( UInt32( time( nil ) ) )
-
-    for index in ships.count..<5
+    var index = 0
+    while(ships.count <= 5)
     {
+      var collisionDetected = false
       let shipID = random()%3
       ships.append(genShip(shipID : shipID))
-      print(ships[index].name)
-      print(ships[index].direction)
-      for coord in ships[index].coordinates
+      let currentShip = ships[index]
+
+      for coord in currentShip.coordinates
       {
         if !takenCoords.contains{ $0 == coord }
         {
@@ -55,15 +62,28 @@ public class Board
         }
         else
         {
-          //remove ship from ships
-          //generate new ship
+          collisionDetected = true
         }
-
       }
-      //initialize ships onto the board
-      var shipCoord = ships[index].coordinates[0]
-      //give the ships a masking symbol until player calls position
-      board[shipCoord[0]][shipCoord[1]] = ships[index].symbol
+
+      if (collisionDetected)
+      {
+        //remove ship from ships
+        ships.remove(at: index)
+        index -= 1
+      }
+      else
+      {
+        //initialize ships onto the board
+        //var shipCoord = ships[index].coordinates[0]
+        //give the ships a masking symbol until player calls position
+        //board[shipCoord[0]][shipCoord[1]] = ships[index].symbol
+        for shipCoord in ships[index].coordinates
+        {
+          board[shipCoord[0]][shipCoord[1]] = ships[index].symbol
+        }
+      }
+      index += 1
     }
 
 

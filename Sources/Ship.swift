@@ -80,7 +80,6 @@ public class Ship
           coord.append(initialCoord[0] + index)
           coord.append(initialCoord[1])
           coordinates.append(coord)
-          print(coordinates)
         }
       }
     case 1:
@@ -97,7 +96,6 @@ public class Ship
           coord.append(initialCoord[0])
           coord.append(initialCoord[1] + index)
           coordinates.append(coord)
-          print(coordinates)
         }
       }
     case 2:
@@ -114,7 +112,6 @@ public class Ship
           coord.append(initialCoord[0] - index)
           coord.append(initialCoord[1])
           coordinates.append(coord)
-          print(coordinates)
         }
       }
     case 3:
@@ -131,7 +128,6 @@ public class Ship
           coord.append(initialCoord[0])
           coord.append(initialCoord[1] - index)
           coordinates.append(coord)
-          print(coordinates)
         }
       }
     default:

@@ -7,6 +7,8 @@ public class Board
   var board = [[String]]()
   //takenCoords used for debugging to see if appropriate positions are taken
   var takenCoords = [[Int]]()
+  //Array that hold coords that the user has picked
+  var chosenCoord = [[Int]]()
   var vCoords = ["A","B","C","D","E","F","G","H","I","J"]
   var hCoords = ["1","2","3","4","5","6","7","8","9","10"]
 
@@ -84,6 +86,8 @@ public class Board
         {
             takenCoords.append(coord)
         }
+
+        //Display answers for ships
         // for shipCoord in ships[index].coordinates
         // {
         //   board[shipCoord[0]][shipCoord[1]] = ships[index]
@@ -114,31 +118,62 @@ public class Board
   public func checkCoords(userCoord : [Int])
   {
       var isHit : Bool = false
-      if (board[userCoord[0]][userCoord[1]] == " ")
+      var index : Int = 0;
+      if (chosenCoord.contains{(where: $0 == userCoord)})
       {
-        print("You already chose this spot, no ship here.")
+        print("You this spot already! Pick a new spot.")
       }
       else
       {
         for ship in ships
         {
-          // for coord in ship.coordinates
-          // {
-          //   if (coord == userCoord)
-          //   {
-          //     board[userCoord[0]][userCoord[1]] = ship.symbol
-          //   }
-          // }
-          isHit = ship.checkHit(userCoord)
-          print(isHit)
+          isHit = ship.checkHit(userCoord : userCoord)
           if(isHit)
           {
             print(ship.symbol)
             board[userCoord[0]][userCoord[1]] = ship.symbol
+            chosenCoord.append(userCoord)
+            hit()
+            //Check if ship is destoryed - If it is remove it from ships array
+            if(ship.isDestoryed)
+            {
+              ships.remove(at: index)
+              print(ships)
+            }
+            break
           }
+          else
+          {
+            board[userCoord[0]][userCoord[1]] = " "
+          }
+          index += 1
 
         }
-      }
 
+        if(board[userCoord[0]][userCoord[1]] == " ")
+        {
+          miss()
+        }
+      }
+  }
+
+  public func miss()
+  {
+    print("")
+    print("MM     MM II SSSSSSS SSSSSSS !!")
+    print("M M   M M II SS      SS      !!")
+    print("M   M   M II SSSSSSS SSSSSSS !!")
+    print("M       M II      SS      SS   ")
+    print("M       M II SSSSSSS SSSSSSS !!\n")
+  }
+
+  public func hit()
+  {
+    print("")
+    print("HH     HH II TTTTTTTTTT !!")
+    print("HH     HH II     TT     !!")
+    print("HHHHHHHHH II     TT     !!")
+    print("HH     HH II     TT       ")
+    print("HH     HH II     TT     !!\n")
   }
 }

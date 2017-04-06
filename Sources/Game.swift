@@ -14,7 +14,7 @@ public class Game
 {
   public func start()
   {
-    let board = Board()
+    var board = Board()
     var play : Bool = true
     print("Welcome to Battleships! Made by the Lam fam.")
     repeat {
@@ -28,7 +28,7 @@ public class Game
           var col : Int
           row = getRow()
           col = getCol()
-          print("You've decided to fire at: ")
+          print("\n\nYou've decided to fire at: ")
           print("row: \(row), col: \(col)")
           //pass coords to board
             //board will check if it hit a ship
@@ -39,6 +39,10 @@ public class Game
         }
         //Ask if user wants to play again
         play = playAgain()
+        if(play)
+        {
+          board = Board()
+        }
     } while (play)
 
   }
@@ -68,7 +72,10 @@ public class Game
 
       repeat {
           print("Please enter row (A-J): ")
-          let getRow = readLine()!
+          var getRow = readLine()!
+          //Handles if user enter in a lowercase - it will convert to upper
+          getRow = getRow.uppercased()
+          //Handles if user enters in a string it will just take the first letter
           let charRow : Character = getRow[getRow.startIndex]
           row = Int(charRow.asciiValue!) - 64
       } while (row <= 0 || row > 10)

@@ -17,20 +17,6 @@ public class Board
     //Create a 10 x 10 two dimensional array
     self.board = [[String]](repeating:[String](repeating:"*", count:10), count:10)
     placeShipsOnBoard()
-    for ship in ships
-    {
-      print("Name: \(ship.name)")
-      switch(ship.direction)
-      {
-      case 0: print("Direction: North")
-      case 1: print("Direction: East")
-      case 2: print("Direction: South")
-      case 3: print("Direction: West")
-      default: print("")
-      }
-      print("Coordinates: \(ship.coordinates)")
-    }
-    print("Taken Coords: \(takenCoords)")
   }
 
   public func displayBoard()
@@ -110,7 +96,7 @@ public class Board
       case 0 : ship = TugBoat(coordinates : [[vInitialCoord,hInitialCoord]])
       case 1 : ship = Submarine(coordinates : [[vInitialCoord,hInitialCoord]])
       case 2 : ship = ACCarrier(coordinates : [[vInitialCoord,hInitialCoord]])
-      default : print("Broke in Board.swift:genShip method.")
+      default : print("Cannot generate ship.")
     }
     return ship!
   }
@@ -130,7 +116,6 @@ public class Board
           isHit = ship.checkHit(userCoord : userCoord)
           if(isHit)
           {
-            print(ship.symbol)
             board[userCoord[0]][userCoord[1]] = ship.symbol
             chosenCoord.append(userCoord)
             hit()
@@ -138,7 +123,6 @@ public class Board
             if(ship.isDestoryed)
             {
               ships.remove(at: index)
-              print(ships)
             }
             break
           }

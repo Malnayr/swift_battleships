@@ -1,3 +1,9 @@
+/*
+  filename: Game.swift
+  author: Ryan Lam (CST215) & Joe Lam (CST234)
+  date: 4/6/2017
+*/
+
 import Foundation
 
 //Extension for variables that are type Character
@@ -12,12 +18,20 @@ extension Character {
 
 public class Game
 {
+  /*
+    Purpose: Start game by creating a new board and Ships. As well as looping
+             to ask the user for coordinates, etc.
+    Params: None
+    Return: None
+  */
   public func start()
   {
-    var board = Board()
+    var board : Board = Board()
+    board.placeShipsOnBoard()
     var play : Bool = true
     print("\n\nWelcome to Battleships! Made by the Lam fam.")
     repeat {
+        board.displayAnswers()
         board.displayBoard()
         //While all ship are not destoryed
           //Ask for coords
@@ -42,17 +56,28 @@ public class Game
         if(play)
         {
           board = Board()
+          board.placeShipsOnBoard()
+        }
+        else
+        {
+          print("Thank you for playing Command Line Battleships!")
         }
     } while (play)
 
   }
 
+  /*
+    Purpose:
+    Params:
+    Return:
+  */
   public func playAgain() -> Bool
   {
     var bReturn = false
     var answer : String = ""
 
     repeat {
+      print("Congratulations!  You got all the ships.")
       print("Would you like to play again? (Y/N)")
       answer = readLine()!
       answer = String(answer[answer.startIndex]).lowercased()
@@ -66,6 +91,11 @@ public class Game
     return bReturn
   }
 
+  /*
+    Purpose:
+    Params:
+    Return:
+  */
   public func getRow() -> Int
   {
       var row : Int = -1
@@ -83,6 +113,11 @@ public class Game
       return row - 1
   }
 
+  /*
+    Purpose:
+    Params:
+    Return:
+  */
   public func getCol() -> Int
   {
       var col : Int = -1

@@ -1,32 +1,43 @@
+/*
+  filename: Board.swift
+  author: Ryan Lam (CST215) & Joe Lam (CST234)
+  date: 4/6/2017
+*/
+
 import Foundation
 
 public class Board
 {
+  //Store all the ships that belong to the board
   var ships = [Ship]()
-  //Empty 2D array
+  //Board that will be displayed to the user
   var board = [[String]]()
   //takenCoords used for debugging to see if appropriate positions are taken
   var takenCoords = [[Int]]()
   //Array that hold coords that the user has picked
   var chosenCoord = [[Int]]()
+  //Coordinate choices that will be displayed to the user on the board
   var vCoords = ["A","B","C","D","E","F","G","H","I","J"]
   var hCoords = ["1","2","3","4","5","6","7","8","9","10"]
 
   /*
-    Purpose: Initalize the board as well as initialize all ships that should
+    Purpose: Initialize the board
     Params: None
+    Return: None
   */
   public init()
   {
-    //Create a 10 x 10 two dimensional array
+    //Create a 10 x 10 two dimensional array - each position is set to '*'
     self.board = [[String]](repeating:[String](repeating:"*", count:10), count:10)
-    placeShipsOnBoard()
   }
 
+  /*
+    Purpose: Print/display the board to the user
+    Params: None
+    Return: None
+  */
   public func displayBoard()
   {
-    //for each row in board
-      //for each column in row
 
     var vIndex : Int = 0
     var boardString : String = "  \(hCoords.joined(separator:"  "))\n"
@@ -45,6 +56,11 @@ public class Board
     print(boardString)
   }
 
+  /*
+    Purpose: Initialize ships that will be displayed on the board
+    Params: None
+    Return: None
+  */
   public func placeShipsOnBoard()
   {
     srand( UInt32( time( nil ) ) )
@@ -76,16 +92,15 @@ public class Board
         {
             takenCoords.append(coord)
         }
-
-        //Display answers for ships
-        // for shipCoord in ships[index].coordinates
-        // {
-        //   board[shipCoord[0]][shipCoord[1]] = ships[index]
-        // }
-
       }
     }
   }
+  /*
+    Purpose: Function that randomly generates a ship, and intial coordinates that
+             it will be places on
+    Params: shipID - The id to determine what ship to create
+    Return: Returns Ship
+  */
   //Use this to generate ships randomly
   public func genShip(shipID : Int) -> Ship
   {
@@ -105,6 +120,11 @@ public class Board
     return ship!
   }
 
+  /*
+    Purpose: Check if user's coordinate match a ship's coordinate on the board
+    Params: userCoord - User's input on where to check for ship
+    Return: None
+  */
   public func checkCoords(userCoord : [Int])
   {
       var isHit : Bool = false
@@ -145,6 +165,7 @@ public class Board
       }
   }
 
+  //Print function that prints miss message
   public func miss()
   {
     print("You missed!!")
@@ -156,6 +177,7 @@ public class Board
     print("M       M II SSSSSSS SSSSSSS !!\n")
   }
 
+  //Print function that prints hit message
   public func hit()
   {
     print("")
@@ -164,5 +186,24 @@ public class Board
     print("HHHHHHHHH II     TT     !!")
     print("HH     HH II     TT       ")
     print("HH     HH II     TT     !!\n")
+  }
+
+  //Debug function to display the ship coordintes
+  public func displayAnswers()
+  {
+    for ship in ships
+    {
+      print("Name: \(ship.name)")
+      switch(ship.direction)
+      {
+      case 0: print("Direction: North")
+      case 1: print("Direction: East")
+      case 2: print("Direction: South")
+      case 3: print("Direction: West")
+      default: print("")
+      }
+      print("Coordinates: \(ship.coordinates)")
+    }
+    print("Taken Coords: \(takenCoords)")
   }
 }

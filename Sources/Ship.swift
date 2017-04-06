@@ -1,3 +1,9 @@
+/*
+  filename: Ship.swift
+  author: Ryan Lam (CST215) & Joe Lam (CST234)
+  date: 4/6/2017
+*/
+
 import Foundation
 
 public class Ship
@@ -18,9 +24,16 @@ public class Ship
   var direction : Int
 
   //Where the ship is located on the board
-  //var coordinates = Coordinate[]()
   var coordinates : [[Int]]
 
+  /*
+    Purpose: Initialize Ship parameters
+    Params: size - size of Ship
+            symbol - Ship symbol
+            name - name of Ship
+            coordinates - Initial coordinate of Ship
+    Return: None
+  */
   public init(size : Int, symbol : String, name : String, coordinates : [[Int]])
   {
       self.size = size
@@ -31,6 +44,11 @@ public class Ship
       self.placeShip()
   }
 
+  /*
+    Purpose: Generate a new direction that the Ship should be facing
+    Params: None
+    Return: None
+  */
   public func genDirection()
   {
     //North(0), East(1), South(2), West(3)
@@ -38,6 +56,11 @@ public class Ship
     return direction = random()%4
   }
 
+  /*
+    Purpose: Check if the user's coordinates match Ship's coordinate
+    Params: userCoord - User's coordinate
+    Return: Return Bool - True if Ship was hit, False if Ship was not
+  */
   public func checkHit(userCoord : [Int]) -> Bool
   {
     var isHit : Bool = false
@@ -63,6 +86,12 @@ public class Ship
     return isHit
   }
 
+  /*
+    Purpose: Check Ship boundary placement, as well as setting the other coordinates
+             that the ship belongs to based on the direction and size of the Ship.
+    Params: None
+    Return: None
+  */
   public func placeShip()
   {
     var initialCoord = coordinates[0]

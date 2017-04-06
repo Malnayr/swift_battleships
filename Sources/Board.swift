@@ -75,9 +75,7 @@ public class Board
       else
       {
         //initialize ships onto the board
-        //var shipCoord = ships[index].coordinates[0]
         //give the ships a masking symbol until player calls position
-        //board[shipCoord[0]][shipCoord[1]] = ships[index].symbol
         for shipCoord in ships[index].coordinates
         {
           board[shipCoord[0]][shipCoord[1]] = ships[index].symbol
@@ -85,8 +83,6 @@ public class Board
       }
       index += 1
     }
-
-
   }
   //Use this to generate ships randomly
   public func genShip(shipID : Int) -> Ship
@@ -98,9 +94,9 @@ public class Board
     {
       //generate ship coordinates before you create the Ship
       //Then pass in the coordinates
-    case 0 : ship = TugBoat(coordinates : [[vInitialCoord,hInitialCoord]])
-    case 1 : ship = Submarine(coordinates : [[vInitialCoord,hInitialCoord]])
-    case 2 : ship = ACCarrier(coordinates : [[vInitialCoord,hInitialCoord]])
+      case 0 : ship = TugBoat(coordinates : [[vInitialCoord,hInitialCoord]])
+      case 1 : ship = Submarine(coordinates : [[vInitialCoord,hInitialCoord]])
+      case 2 : ship = ACCarrier(coordinates : [[vInitialCoord,hInitialCoord]])
       default : print("Broke in Board.swift:genShip method.")
     }
     return ship!

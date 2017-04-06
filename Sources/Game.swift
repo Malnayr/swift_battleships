@@ -14,12 +14,6 @@ extension Character {
     }
 }
 
-//Coordinate will be placed into an array which will be passed into a ship
-struct coordinate {
-    var latitude : Int
-    var longitude : Int
-}
-
 public class Game
 {
   public func start()
@@ -40,7 +34,10 @@ public class Game
           col = getCol()
           print("row: \(row)")
           print("col: \(col)")
-          //pass coords to check if hit
+          //pass coords to board
+            //board will check if it hit a ship
+
+
           //display board
           board.displayBoard()
         }

@@ -16,7 +16,7 @@ public class Game
   {
     var board = Board()
     var play : Bool = true
-    print("Welcome to Battleships! Made by the Lam fam.")
+    print("\n\nWelcome to Battleships! Made by the Lam fam.")
     repeat {
         board.displayBoard()
         //While all ship are not destoryed
@@ -28,11 +28,12 @@ public class Game
           var col : Int
           row = getRow()
           col = getCol()
+
+          print("\n\nYou've decided to fire at: ")
+          print("row: \(row), col: \(col)")
           //pass coords to board
             //board will check if it hit a ship
           board.checkCoords(userCoord: [row,col])
-          print("\n\nYou've decided to fire at: ")
-          print("row: \(row), col: \(col)")
           //display board
           board.displayBoard()
         }

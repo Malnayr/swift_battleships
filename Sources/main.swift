@@ -4,5 +4,7 @@
   date: 4/6/2017
 */
 
+//Create a new game
 let game = Game()
+//Start game
 game.start()

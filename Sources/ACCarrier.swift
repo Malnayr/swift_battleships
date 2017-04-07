@@ -7,10 +7,11 @@
 public class ACCarrier : Ship
 {
   /*
-    Purpose:
+    Purpose: Intialize child class
   */
   public init(coordinates : [[Int]])
   {
+    //Initialize Air Craft Carrier with default values
     super.init(size : 4, symbol : "Ш", name : "Air Craft Carrier", coordinates : coordinates)
   }
 }

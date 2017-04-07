@@ -26,27 +26,32 @@ public class Game
   */
   public func start()
   {
+    //Initialize board
     var board : Board = Board()
+    //Create the Ships for the board
     board.placeShipsOnBoard()
+    //Variable to see if user wants to keep playing
     var play : Bool = true
     print("\n\nWelcome to Battleships! Made by the Lam fam.")
+    //While user still wants to play
     repeat {
-        board.displayAnswers()
+        //board.displayAnswers()
+        //display board to user
         board.displayBoard()
         //While all ship are not destoryed
-          //Ask for coords
         while(board.ships.count > 0)
         {
           //variables for user coordinates
           var row : Int
           var col : Int
+          //get user's coordinates
           row = getRow()
           col = getCol()
 
           print("\n\nYou've decided to fire at: ")
           print("row: \(row), col: \(col)")
-          //pass coords to board
-            //board will check if it hit a ship
+
+          //check if it hit a ship
           board.checkCoords(userCoord: [row,col])
           //display board
           board.displayBoard()
@@ -55,11 +60,14 @@ public class Game
         play = playAgain()
         if(play)
         {
+          //Assign board a new board
           board = Board()
+          //Generate new ships for the board
           board.placeShipsOnBoard()
         }
         else
         {
+          //Display good bye message
           print("Thank you for playing Command Line Battleships!")
         }
     } while (play)
@@ -67,17 +75,19 @@ public class Game
   }
 
   /*
-    Purpose:
-    Params:
-    Return:
+    Purpose: Function that is called to ask user if s/he wants to play again
+    Params: None
+    Return: Returns Bool - True, if user wants to play again, False otherwise.
   */
   public func playAgain() -> Bool
   {
+    //Variables
     var bReturn = false
     var answer : String = ""
-
+    print("Congratulations!  You got all the ships.")
+    //While user does not specify yes or no
     repeat {
-      print("Congratulations!  You got all the ships.")
+      //Ask and prompt user if they want to play again.
       print("Would you like to play again? (Y/N)")
       answer = readLine()!
       answer = String(answer[answer.startIndex]).lowercased()
@@ -92,14 +102,16 @@ public class Game
   }
 
   /*
-    Purpose:
-    Params:
-    Return:
+    Purpose: Function to call to ask user for a row (x) coordinate. Converts
+             character to its ascii value - 64 to get the actual coordinate on
+             board
+    Params: None
+    Return: Return Int - Returns users input as a number
   */
   public func getRow() -> Int
   {
       var row : Int = -1
-
+      //While user doesn't specify a coordinate between A-J
       repeat {
           print("Please enter row (A-J): ")
           var getRow = readLine()!
@@ -109,19 +121,19 @@ public class Game
           let charRow : Character = getRow[getRow.startIndex]
           row = Int(charRow.asciiValue!) - 64
       } while (row <= 0 || row > 10)
-
+      //Return row number with offset of 1
       return row - 1
   }
 
   /*
-    Purpose:
-    Params:
-    Return:
+    Purpose: Function to call to ask user for column (y) coordinate
+    Params: None
+    Return: Returns Int - Returns users input as a number
   */
   public func getCol() -> Int
   {
       var col : Int = -1
-
+      //While user doesn't pick a number between 1-10
       repeat {
           print("Please enter column (1-10): ")
           let getCol = readLine()!
@@ -131,6 +143,7 @@ public class Game
           }
 
       } while (col <= 0 || col > 10)
+      //Return column number with offset of 1
       return col - 1
   }
 }

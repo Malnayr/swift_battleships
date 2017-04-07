@@ -51,6 +51,7 @@ public class Ship
   */
   public func genDirection()
   {
+    //Generate random number 0-3
     //North(0), East(1), South(2), West(3)
     srand( UInt32( time( nil ) ) )
     return direction = random()%4
@@ -63,19 +64,26 @@ public class Ship
   */
   public func checkHit(userCoord : [Int]) -> Bool
   {
+    //Variable to return to see if a ship was hit
     var isHit : Bool = false
+    //Check if ship is already destoryed
     if (!isDestoryed)
     {
+      //Loop through all coordinates
       for coord in self.coordinates
       {
+        //If user's coordinates match
         if(coord == userCoord)
         {
           isHit = true
+          //Make ship size smaller
           size -= 1
           print("The \(name) has been hit!")
-          //remove the index that has been hit from the ship coordinate array
+          //Remove the index that has been hit from the ship coordinate array
           self.coordinates = self.coordinates.filter(){ $0 != coord }
         }
+        //After removing coord check the coordinates array count
+        //If it is 0, then it is destoryed
         if(self.coordinates.count == 0)
         {
           isDestoryed = true
@@ -94,11 +102,15 @@ public class Ship
   */
   public func placeShip()
   {
+    //Intial coordinate of ship
     var initialCoord = coordinates[0]
+    //Check if ship will go out of the boundary (of 9)
     //North(0), East(1), South(2), West(3)
     switch(self.direction)
     {
     case 0:
+      //If boundaries got over then generate a new direction for the ship and
+      //call itself. Recursion!
       if(initialCoord[0] + self.size > 9)
       {
         self.genDirection()

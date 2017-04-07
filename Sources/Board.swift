@@ -38,21 +38,28 @@ public class Board
   */
   public func displayBoard()
   {
-
+    //Index to keep track of to vCoords value
     var vIndex : Int = 0
+    //String that stores board string
+    //Initially holds hCoords that are separated
     var boardString : String = "  \(hCoords.joined(separator:"  "))\n"
 
+    //Loop through each row inside board
     for row in board
     {
+      //Add vCoord to board string
       boardString += vCoords[vIndex]
+      //Loop through each column
       for column in row
       {
+        //Add column value into board string
         //<space>symbol<space>
         boardString += " \(column) "
       }
       boardString += "\n"
       vIndex += 1
     }
+    //print board string
     print(boardString)
   }
 
@@ -63,31 +70,40 @@ public class Board
   */
   public func placeShipsOnBoard()
   {
+    //Set random values truly random
     srand( UInt32( time( nil ) ) )
+    //index for keeping track of where ship is
     var index = 0
+    //Keep track if a collision has occured
     var collisionDetected : Bool
+    //While ships array doesn't equal 5
     while(ships.count != 5)
     {
+      //Initialize variables
       collisionDetected = false
       let shipID = random()%3
+      //Generate Ship based on shipID
       ships.append(genShip(shipID : shipID))
       index = ships.count - 1
       let currentShip = ships[index]
 
+      //Loop through every coordinates in ship
       for coord in currentShip.coordinates
       {
+        //See if Ship coordinates belong in takenCoords
         collisionDetected = !takenCoords.contains{$0 == coord} ? collisionDetected : true
       }
 
+      //If collision occured
       if (collisionDetected)
       {
-        //remove ship from ships
+        //Remove ship from ships - this will ensure that the while loop will Loop
+        //again for a new ship that doesn't collide with other ships
         ships.remove(at: index)
       }
       else
       {
-        //initialize ships onto the board
-        //give the ships a masking symbol until player calls position
+        //If no collisions occured add all ship coordinates into takenCoords
         for coord in currentShip.coordinates
         {
             takenCoords.append(coord)
@@ -104,19 +120,20 @@ public class Board
   //Use this to generate ships randomly
   public func genShip(shipID : Int) -> Ship
   {
+    //Variables that specify the initial coordinate the ship will be placed in
     let vInitialCoord = random()%10
     let hInitialCoord = random()%10
-
+    //Optional ship variable
     var ship : Ship?
+    //Create ship based on what shipID was passed in
     switch (shipID)
     {
-      //generate ship coordinates before you create the Ship
-      //Then pass in the coordinates
       case 0 : ship = TugBoat(coordinates : [[vInitialCoord,hInitialCoord]])
       case 1 : ship = Submarine(coordinates : [[vInitialCoord,hInitialCoord]])
       case 2 : ship = ACCarrier(coordinates : [[vInitialCoord,hInitialCoord]])
       default : print("Cannot generate ship.")
     }
+    //Unwrap and return the ship
     return ship!
   }
 
@@ -127,37 +144,47 @@ public class Board
   */
   public func checkCoords(userCoord : [Int])
   {
+      //Variable to determine if ship was hit
       var isHit : Bool = false
+      //Index to keep track of where the ship is in ships array
       var index : Int = 0;
+      //Check if user already passed in the same coordinate
       if (chosenCoord.contains{(where: $0 == userCoord)})
       {
         print("You this spot already! Pick a new spot.")
       }
       else
       {
+        //Loop through all ships
         for ship in ships
         {
+          //Check if user's coordinate hit a ship
           isHit = ship.checkHit(userCoord : userCoord)
+          //If it was hit them replace the value on the board with the ship symbol
           if(isHit)
           {
             board[userCoord[0]][userCoord[1]] = ship.symbol
+            //Add user's coord into chosenCoord array
             chosenCoord.append(userCoord)
+            //display hit message
             hit()
-            //Check if ship is destoryed - If it is remove it from ships array
+            //Check if ship is destoryed - if it is remove it from ships array
             if(ship.isDestoryed)
             {
               ships.remove(at: index)
             }
+            //break from loop since it hit a ship
             break
           }
           else
           {
+            //If no ship were hit set the value on the board as a space
             board[userCoord[0]][userCoord[1]] = " "
           }
+          //Increment index 
           index += 1
-
         }
-
+        //If user's coordinates is a space, display miss message
         if(board[userCoord[0]][userCoord[1]] == " ")
         {
           miss()

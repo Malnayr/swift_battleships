@@ -6,10 +6,11 @@
 public class TugBoat : Ship
 {
   /*
-    Purpose:
+    Purpose: Initialize child class
   */
   public init(coordinates : [[Int]])
   {
+    //Initialize TugBoat with default values
     super.init(size : 2, symbol : "Ӝ", name : "Tug Boat", coordinates : coordinates)
   }
 }
